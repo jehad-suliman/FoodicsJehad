@@ -1,4 +1,6 @@
 package com.jehad.foodics.domain.model
 
-class Category {
-}
+data class Category(
+    val id: String,
+    val name: String
+)
