@@ -35,6 +35,7 @@ fun SearchBar(
         TextField(
             value = query,
             onValueChange = onQueryChange,
+            enabled = false,
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("Search products") },
             leadingIcon = {
@@ -57,6 +58,7 @@ fun SearchBar(
             colors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
             )
         )
