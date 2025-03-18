@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class TablesViewModel(
+class MenuViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getProductsUseCase: GetProductsUseCase,
     private val orderRepository: OrderRepository
@@ -30,7 +30,7 @@ class TablesViewModel(
 
             // Collect categories
             getCategoriesUseCase().collect { categories ->
-                _state.update { it.copy(categories = categories) }
+                _state.update { it.copy(categories = categories, isLoading = false) }
 
                 // Select first category if available and not already selected
                 if (categories.isNotEmpty() && _state.value.selectedCategoryId == null) {
@@ -81,6 +81,6 @@ data class TablesState(
     val selectedCategoryId: String? = null,
     val orderItemCount: Int = 0,
     val totalPrice: Double = 0.0,
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val error: String? = null
 )

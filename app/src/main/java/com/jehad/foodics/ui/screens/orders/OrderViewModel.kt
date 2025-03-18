@@ -33,12 +33,6 @@ class OrderViewModel(private val orderRepository: OrderRepository) : ViewModel()
         }
     }
 
-    fun addProductToOrder(product: Product) {
-        viewModelScope.launch {
-            orderRepository.addOrUpdateOrderItem(product)
-        }
-    }
-
     fun clearOrder() {
         viewModelScope.launch {
             orderRepository.clearOrder()

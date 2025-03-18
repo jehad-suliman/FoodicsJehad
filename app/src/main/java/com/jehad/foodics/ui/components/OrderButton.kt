@@ -34,8 +34,8 @@ fun OrderButton(
             .fillMaxWidth()
             .clickable { onClick.invoke() }
             .padding(16.dp)
-            .background(Color(0xFF6A1B9A)) // Purple background color
             .clip(RoundedCornerShape(8.dp))
+            .background(Color(0xFF6A1B9A)) // Purple background color
             .padding(16.dp),
         contentAlignment = Alignment.CenterStart
     ) {
@@ -50,6 +50,7 @@ fun OrderButton(
                 Text(
                     text = orderNumber.toString(),
                     color = Color(0xFF6A1B9A),
+                    style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -59,18 +60,21 @@ fun OrderButton(
             Text(
                 text = orderText,
                 color = Color.White,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(1f)
             )
 
             Text(
-                text = price,
+                text = "$$price",
+                modifier = Modifier.padding(horizontal = 15.dp),
                 color = Color.White,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.titleLarge,
             )
 
             Icon(
                 imageVector = Icons.Default.ArrowForward,
+                modifier = Modifier.size(35.dp),
                 contentDescription = null,
                 tint = Color.White
             )

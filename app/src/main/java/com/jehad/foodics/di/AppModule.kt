@@ -5,12 +5,10 @@ import com.jehad.foodics.data.remote.api.ApiService
 import com.jehad.foodics.data.repository.CategoryRepository
 import com.jehad.foodics.data.repository.OrderRepository
 import com.jehad.foodics.data.repository.ProductRepository
-import com.jehad.foodics.domain.model.Order
 import com.jehad.foodics.domain.usecase.GetCategoriesUseCase
 import com.jehad.foodics.domain.usecase.GetProductsUseCase
-import com.jehad.foodics.ui.screens.menu.MenuViewModel
 import com.jehad.foodics.ui.screens.orders.OrderViewModel
-import com.jehad.foodics.ui.screens.tables.TablesViewModel
+import com.jehad.foodics.ui.screens.tables.MenuViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -20,7 +18,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val appModule = module {
@@ -57,11 +54,7 @@ val appModule = module {
     single { GetCategoriesUseCase(get()) }
     single { GetProductsUseCase(get()) }
 
-    // Shared Order instance
-    single { Order() }
-
     // ViewModels
-    viewModel { TablesViewModel(get(), get(), get()) }
+    viewModel { MenuViewModel(get(), get(), get()) }
     viewModel { OrderViewModel(get()) }
-    viewModel { MenuViewModel() }
 }

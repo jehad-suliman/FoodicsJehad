@@ -10,10 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jehad.foodics.ui.components.BottomNavBar
 import com.jehad.foodics.ui.components.BottomNavItem
-import com.jehad.foodics.ui.screens.menu.MenuScreen
+import com.jehad.foodics.ui.screens.menu.TablesScreen
 import com.jehad.foodics.ui.screens.orders.OrderScreen
 import com.jehad.foodics.ui.screens.settings.SettingsScreen
-import com.jehad.foodics.ui.screens.tables.TablesScreen
+import com.jehad.foodics.ui.screens.tables.MenuScreen
 
 @Composable
 fun AppNavigation() {
@@ -27,17 +27,17 @@ fun AppNavigation() {
         ) { innerPadding ->
             NavHost(
                 navController = navController,
-                startDestination = BottomNavItem.Tables.route,
+                startDestination = BottomNavItem.Menu.route,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable(BottomNavItem.Tables.route) {
-                    TablesScreen()
+                composable(BottomNavItem.Menu.route) {
+                    MenuScreen()
                 }
                 composable(BottomNavItem.Orders.route) {
                     OrderScreen()
                 }
-                composable(BottomNavItem.Menu.route) {
-                    MenuScreen()
+                composable(BottomNavItem.Tables.route) {
+                    TablesScreen()
                 }
                 composable(BottomNavItem.Settings.route) {
                     SettingsScreen()

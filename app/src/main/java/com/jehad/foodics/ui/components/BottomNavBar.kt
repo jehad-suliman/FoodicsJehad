@@ -3,7 +3,7 @@ package com.jehad.foodics.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
@@ -18,9 +18,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val title: String) {
-    object Tables : BottomNavItem("tables", Icons.Default.Home, "Tables")
+    object Menu : BottomNavItem("menu", Icons.Default.Home, "Menu")
     object Orders : BottomNavItem("orders", Icons.Default.ShoppingCart, "Orders")
-    object Menu : BottomNavItem("menu", Icons.Default.Menu, "Menu")
+    object Tables : BottomNavItem("tables", Icons.Default.Place, "Tables")
     object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
 }
 
@@ -30,9 +30,9 @@ fun BottomNavBar(
     modifier: Modifier = Modifier
 ) {
     val items = listOf(
-        BottomNavItem.Tables,
-        BottomNavItem.Orders,
         BottomNavItem.Menu,
+        BottomNavItem.Orders,
+        BottomNavItem.Tables,
         BottomNavItem.Settings
     )
 
