@@ -3,6 +3,7 @@ package com.jehad.foodics.di
 import com.jehad.foodics.data.local.database.AppDatabase
 import com.jehad.foodics.data.remote.api.ApiService
 import com.jehad.foodics.data.repository.CategoryRepository
+import com.jehad.foodics.data.repository.OrderRepository
 import com.jehad.foodics.data.repository.ProductRepository
 import com.jehad.foodics.domain.model.Order
 import com.jehad.foodics.domain.usecase.GetCategoriesUseCase
@@ -19,6 +20,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val appModule = module {
@@ -42,13 +44,14 @@ val appModule = module {
     single { AppDatabase.getDatabase(androidContext()) }
     single { get<AppDatabase>().categoryDao() }
     single { get<AppDatabase>().productDao() }
-
+    single { get<AppDatabase>().orderDao() }
     // API Service
     single { ApiService(get()) }
 
     // Repositories
     single { CategoryRepository(get(), get()) }
     single { ProductRepository(get(), get()) }
+    single { OrderRepository(get()) }
 
     // Use Cases
     single { GetCategoriesUseCase(get()) }

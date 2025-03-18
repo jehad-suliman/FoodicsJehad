@@ -2,9 +2,10 @@ package com.jehad.foodics.ui.components
 
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -17,8 +18,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val title: String) {
-    object Tables : BottomNavItem("tables", Icons.Default.ThumbUp, "Tables")
-    object Orders : BottomNavItem("orders", Icons.Default.ThumbUp, "Orders")
+    object Tables : BottomNavItem("tables", Icons.Default.Home, "Tables")
+    object Orders : BottomNavItem("orders", Icons.Default.ShoppingCart, "Orders")
     object Menu : BottomNavItem("menu", Icons.Default.Menu, "Menu")
     object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
 }

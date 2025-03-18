@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jehad.foodics.ui.components.BottomNavItem
 import com.jehad.foodics.ui.components.CategoryTabs
+import com.jehad.foodics.ui.components.OrderButton
 import com.jehad.foodics.ui.components.ProductGrid
 import com.jehad.foodics.ui.components.SearchBar
 import com.jehad.foodics.ui.navigation.LocalNavController
@@ -30,15 +31,14 @@ fun TablesScreen(
     viewModel: TablesViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val searchQuery by viewModel.searchQuery.collectAsState()
     val navController = LocalNavController.current
 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         SearchBar(
-            query = searchQuery,
-            onQueryChange = viewModel::updateSearchQuery,
+            query = "",
+            onQueryChange = {},
             modifier = Modifier.padding(8.dp)
         )
 
@@ -96,20 +96,12 @@ fun TablesScreen(
                 )
             }
         }
-
-        Button(
-            onClick = { navController.navigate(BottomNavItem.Orders.route) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = if (state.orderItemCount > 0) {
-                    "View Order (${state.orderItemCount})"
-                } else {
-                    "View Order"
-                }
-            )
+        val orderItemCount = state.orderItemCount
+        if (orderItemCount > 0) {
+            OrderButton(state.orderItemCount, price = state.totalPrice.toString()) {
+                navController.navigate(BottomNavItem.Orders.route)
+            }
         }
+
     }
 }

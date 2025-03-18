@@ -5,18 +5,21 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.jehad.foodics.data.local.dao.CategoryDao
+import com.jehad.foodics.data.local.dao.OrderDao
 import com.jehad.foodics.data.local.dao.ProductDao
 import com.jehad.foodics.data.local.entity.CategoryEntity
+import com.jehad.foodics.data.local.entity.OrderItemEntity
 import com.jehad.foodics.data.local.entity.ProductEntity
 
 @Database(
-    entities = [CategoryEntity::class, ProductEntity::class],
+    entities = [CategoryEntity::class, ProductEntity::class, OrderItemEntity::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun productDao(): ProductDao
+    abstract fun orderDao(): OrderDao
 
     companion object {
         @Volatile

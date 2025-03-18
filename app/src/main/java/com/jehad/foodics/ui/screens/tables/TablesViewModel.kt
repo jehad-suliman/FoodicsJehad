@@ -2,28 +2,25 @@ package com.jehad.foodics.ui.screens.tables
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jehad.foodics.data.repository.OrderRepository
 import com.jehad.foodics.domain.model.Category
-import com.jehad.foodics.domain.model.Order
 import com.jehad.foodics.domain.model.Product
 import com.jehad.foodics.domain.usecase.GetCategoriesUseCase
 import com.jehad.foodics.domain.usecase.GetProductsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class TablesViewModel(
-    private val getCategoriesUseCase:   GetCategoriesUseCase,
+    private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getProductsUseCase: GetProductsUseCase,
-    private val order: Order
+    private val orderRepository: OrderRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(TablesState())
     val state: StateFlow<TablesState> = _state.asStateFlow()
 
-    private val _searchQuery = MutableStateFlow("")
-    val searchQuery = _searchQuery.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -42,32 +39,24 @@ class TablesViewModel(
             }
         }
 
-        // Handle search
         viewModelScope.launch {
-            _searchQuery
-                .debounce(300)
-                .collect { query ->
-                    if (query.isBlank()) {
-                        // If search is empty, show products by selected category
-                        _state.value.selectedCategoryId?.let {
-                            getProductsByCategoryId(it)
-                        }
-                    } else {
-                        // Search products
-                        getProductsUseCase.searchProducts(query).collect { products ->
-                            _state.update { it.copy(products = products) }
-                        }
-                    }
-                }
+            orderRepository.getTotalItems().collect { itemCount ->
+                _state.update { it.copy(orderItemCount = itemCount) }
+            }
         }
+
+        viewModelScope.launch {
+            orderRepository.getTotalPrice().collect { total ->
+                _state.update { it.copy(totalPrice = total) }
+            }
+        }
+
     }
 
     fun selectCategory(categoryId: String) {
         if (_state.value.selectedCategoryId != categoryId) {
             _state.update { it.copy(selectedCategoryId = categoryId) }
             getProductsByCategoryId(categoryId)
-            // Clear search when changing category
-            _searchQuery.value = ""
         }
     }
 
@@ -79,18 +68,10 @@ class TablesViewModel(
         }
     }
 
-    fun updateSearchQuery(query: String) {
-        _searchQuery.value = query
-    }
-
     fun addProductToOrder(product: Product) {
-        order.addItem(product)
-        _state.update { it.copy(orderItemCount = order.getTotalItems()) }
-    }
-
-    fun clearOrder() {
-        order.clear()
-        _state.update { it.copy(orderItemCount = 0) }
+        viewModelScope.launch {
+            orderRepository.addOrUpdateOrderItem(product)
+        }
     }
 }
 
@@ -99,6 +80,7 @@ data class TablesState(
     val products: List<Product> = emptyList(),
     val selectedCategoryId: String? = null,
     val orderItemCount: Int = 0,
+    val totalPrice: Double = 0.0,
     val isLoading: Boolean = false,
     val error: String? = null
 )

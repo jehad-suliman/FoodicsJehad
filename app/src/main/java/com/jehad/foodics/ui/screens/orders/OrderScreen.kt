@@ -82,7 +82,12 @@ fun OrderScreen(
                                     style = MaterialTheme.typography.titleMedium
                                 )
                                 Text(
-                                    text = "$${String.format("%.2f", orderItem.product.price)} each",
+                                    text = "$${
+                                        String.format(
+                                            "%.2f",
+                                            orderItem.product.price
+                                        )
+                                    } each",
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -95,7 +100,12 @@ fun OrderScreen(
                             )
 
                             Text(
-                                text = "$${String.format("%.2f", orderItem.product.price * orderItem.quantity)}",
+                                text = "$${
+                                    String.format(
+                                        "%.2f",
+                                        orderItem.product.price?.times(orderItem.quantity)
+                                    )
+                                }",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
@@ -126,13 +136,14 @@ fun OrderScreen(
             }
         }
 
-        Button(
-            onClick = { viewModel.clearOrder() },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp)
-        ) {
-            Text("Clear Order")
-        }
+        if (state.items.isNotEmpty())
+            Button(
+                onClick = { viewModel.clearOrder() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp)
+            ) {
+                Text("Clear Order")
+            }
     }
 }

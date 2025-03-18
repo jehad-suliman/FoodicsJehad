@@ -1,34 +1,48 @@
 package com.jehad.foodics.ui.screens.orders
 
 import androidx.lifecycle.ViewModel
-import com.jehad.foodics.domain.model.Order
+import androidx.lifecycle.viewModelScope
+import com.jehad.foodics.data.repository.OrderRepository
 import com.jehad.foodics.domain.model.OrderItem
+import com.jehad.foodics.domain.model.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 
-class OrderViewModel(private val order: Order) : ViewModel() {
+class OrderViewModel(private val orderRepository: OrderRepository) : ViewModel() {
     private val _state = MutableStateFlow(OrderState())
     val state: StateFlow<OrderState> = _state.asStateFlow()
 
     init {
-        updateOrderState()
+        observeOrder()
     }
 
-    private fun updateOrderState() {
-        _state.update {
-            OrderState(
-                items = order.items.values.toList(),
-                totalPrice = order.getTotalPrice(),
-                totalItems = order.getTotalItems()
-            )
+    private fun observeOrder() {
+        viewModelScope.launch {
+            combine(
+                orderRepository.getOrderItems(),
+                orderRepository.getTotalPrice(),
+                orderRepository.getTotalItems()
+            ) { items, totalPrice, totalItems ->
+                OrderState(items = items, totalPrice = totalPrice, totalItems = totalItems)
+            }.collect { newState ->
+                _state.value = newState
+            }
+        }
+    }
+
+    fun addProductToOrder(product: Product) {
+        viewModelScope.launch {
+            orderRepository.addOrUpdateOrderItem(product)
         }
     }
 
     fun clearOrder() {
-        order.clear()
-        updateOrderState()
+        viewModelScope.launch {
+            orderRepository.clearOrder()
+        }
     }
 }
 

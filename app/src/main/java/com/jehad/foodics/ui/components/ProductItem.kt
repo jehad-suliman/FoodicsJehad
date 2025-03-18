@@ -46,7 +46,7 @@ fun ProductItem(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(100.dp)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -69,7 +69,7 @@ fun ProductItem(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                if (product.description.isNotEmpty()) {
+                if (product.description?.isNotEmpty() == true) {
                     Text(
                         text = product.description,
                         style = MaterialTheme.typography.bodyMedium,

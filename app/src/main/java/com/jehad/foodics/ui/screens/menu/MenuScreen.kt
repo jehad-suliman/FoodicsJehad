@@ -21,7 +21,7 @@ fun MenuScreen(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Menu Screen\n(Placeholder)",
+            text = "Menu Screen",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )

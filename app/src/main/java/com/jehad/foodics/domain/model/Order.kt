@@ -18,7 +18,7 @@ data class Order(
     }
 
     fun getTotalPrice(): Double {
-        return items.values.sumOf { it.product.price * it.quantity }
+        return items.values.sumOf { (it.product.price ?: 0.0) * it.quantity }
     }
 
     fun getTotalItems(): Int {

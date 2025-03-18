@@ -17,7 +17,7 @@ fun SettingsScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Settings Screen\n(Placeholder)",
+            text = "Settings Screen",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )
