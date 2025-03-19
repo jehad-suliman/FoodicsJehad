@@ -38,7 +38,7 @@ fun OrderButton(
             .clickable { onClick.invoke() }
             .padding(16.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(Color(0xFF6A1B9A)) // Purple background color
+            .background(Color(0xFF6A1B9A))
             .padding(16.dp),
         contentAlignment = Alignment.CenterStart
     ) {

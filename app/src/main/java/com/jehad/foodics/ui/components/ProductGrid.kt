@@ -25,7 +25,10 @@ fun ProductGrid(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(products) { product ->
+        items(
+            items = products,
+            key = { it.id }
+        ){ product ->
             ProductItem(
                 product = product,
                 onProductClick = onProductClick,

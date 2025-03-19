@@ -32,14 +32,13 @@ fun CategoryTabs(
     TabRow(
         selectedTabIndex = selectedIndex,
         modifier = modifier.fillMaxWidth(),
-        divider = {}, // Optional: Customize or remove the divider
+        divider = {},
         indicator = { tabPositions ->
-            // Custom indicator: A colored underline for the selected tab
             Box(
                 modifier = Modifier
                     .tabIndicatorOffsett(tabPositions[selectedIndex])
-                    .height(2.dp) // Height of the indicator
-                    .background(Color.Blue) // Color of the indicator
+                    .height(2.dp)
+                    .background(Color.Blue)
             )
         }
     ) {

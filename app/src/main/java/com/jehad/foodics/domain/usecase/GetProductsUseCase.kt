@@ -9,6 +9,10 @@ class GetProductsUseCase(private val productRepository: ProductRepository) {
         return productRepository.getAllProducts()
     }
 
+    fun getAllProducts(): Flow<List<Product>> {
+        return productRepository.getAllProducts()
+    }
+
     fun getProductsByCategory(categoryId: String): Flow<List<Product>> {
         return productRepository.getProductsByCategory(categoryId)
     }

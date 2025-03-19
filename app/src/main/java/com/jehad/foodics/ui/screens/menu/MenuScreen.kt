@@ -36,13 +36,15 @@ fun MenuScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         SearchBar(
-            query = "",
-            onQueryChange = {},
+            query = state.searchQuery,
+            onQueryChange = { newQuery ->
+                viewModel.updateSearchQuery(newQuery)
+            },
             modifier = Modifier.padding(8.dp)
         )
 
 
-        if (state.categories.isNotEmpty()) {
+        if (!state.isSearching && state.categories.isNotEmpty()) {
             CategoryTabs(
                 categories = state.categories,
                 selectedCategoryId = state.selectedCategoryId ?: state.categories.first().id,

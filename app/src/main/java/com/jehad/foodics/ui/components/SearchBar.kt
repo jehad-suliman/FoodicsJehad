@@ -35,7 +35,6 @@ fun SearchBar(
         TextField(
             value = query,
             onValueChange = onQueryChange,
-            enabled = false,
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("Search products") },
             leadingIcon = {
