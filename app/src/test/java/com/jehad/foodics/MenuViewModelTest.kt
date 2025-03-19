@@ -100,13 +100,7 @@ class MenuViewModelTest {
     @Test
     fun `adding product to order should update quantities and maintain selected category`() =
         runTest {
-            // Print the actual products list to see what we're starting with
-            println("Products: ${products.map { it.id to it.category?.id }}")
 
-            // Print the filtered products to ensure our filter works
-            println("Products for cat2: ${products.filter { it.category?.id == "cat2" }.map { it.id }}")
-
-            // Setup initial state with category "cat2" selected
             viewModel.selectCategory("cat2")
             testDispatcher.scheduler.advanceUntilIdle()
 
@@ -120,16 +114,16 @@ class MenuViewModelTest {
             assertEquals(0, initialState.products[0].quantity)
 
             // Setup order repository to return an updated order item
-            val updatedProduct = products[2].copy(quantity = 1)
+            val updatedProduct = products[0].copy(quantity = 1)
             val orderItem = OrderItem(updatedProduct, 1)
             every { orderRepository.getOrderItems() } returns flowOf(listOf(orderItem))
 
             // Add product to order
-            viewModel.addProductToOrder(products[2])
+            viewModel.addProductToOrder(products[0])
             testDispatcher.scheduler.advanceUntilIdle()
 
             // Verify product was added to order
-            coVerify { orderRepository.addOrUpdateOrderItem(products[2]) }
+            coVerify { orderRepository.addOrUpdateOrderItem(products[0]) }
 
             // Verify state after adding product
             val updatedState = viewModel.state.value
