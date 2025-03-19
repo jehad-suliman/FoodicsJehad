@@ -10,10 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jehad.foodics.ui.components.BottomNavBar
 import com.jehad.foodics.ui.components.BottomNavItem
-import com.jehad.foodics.ui.screens.menu.TablesScreen
+import com.jehad.foodics.ui.screens.tables.TablesScreen
 import com.jehad.foodics.ui.screens.orders.OrderScreen
 import com.jehad.foodics.ui.screens.settings.SettingsScreen
-import com.jehad.foodics.ui.screens.tables.MenuScreen
+import com.jehad.foodics.ui.screens.menu.MenuScreen
 
 @Composable
 fun AppNavigation() {

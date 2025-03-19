@@ -1,4 +1,4 @@
-package com.jehad.foodics.ui.screens.tables
+package com.jehad.foodics.ui.screens.menu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

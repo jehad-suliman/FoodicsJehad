@@ -2,7 +2,9 @@ package com.jehad.foodics.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -77,6 +80,39 @@ fun OrderButton(
                 modifier = Modifier.size(35.dp),
                 contentDescription = null,
                 tint = Color.White
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OrderButtonPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            OrderButton(
+                orderNumber = 1,
+                price = "24.99",
+                onClick = {}
+            )
+
+            OrderButton(
+                orderNumber = 2,
+                orderText = "Track Order",
+                price = "49.50",
+                onClick = {}
+            )
+
+            OrderButton(
+                orderNumber = 3,
+                orderText = "Order Details",
+                price = "199.99",
+                onClick = {}
             )
         }
     }

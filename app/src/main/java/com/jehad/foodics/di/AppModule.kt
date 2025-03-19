@@ -8,7 +8,7 @@ import com.jehad.foodics.data.repository.ProductRepository
 import com.jehad.foodics.domain.usecase.GetCategoriesUseCase
 import com.jehad.foodics.domain.usecase.GetProductsUseCase
 import com.jehad.foodics.ui.screens.orders.OrderViewModel
-import com.jehad.foodics.ui.screens.tables.MenuViewModel
+import com.jehad.foodics.ui.screens.menu.MenuViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

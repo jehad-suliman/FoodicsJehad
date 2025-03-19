@@ -1,4 +1,4 @@
-package com.jehad.foodics.ui.screens.menu
+package com.jehad.foodics.ui.screens.tables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

@@ -2,6 +2,7 @@ package com.jehad.foodics.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -122,6 +124,55 @@ fun ProductItem(
                     style = MaterialTheme.typography.labelLarge
                 )
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductItemPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            ProductItem(
+                product = Product(
+                    id = "1",
+                    name = "Wireless Headphones",
+                    description = "Premium noise-cancelling wireless headphones with long battery life",
+                    price = 149.99,
+                    imageUrl = "",
+                    quantity = 2
+                ),
+                onProductClick = {}
+            )
+
+            ProductItem(
+                product = Product(
+                    id = "2",
+                    name = "Super Ultra Premium Smartphone XYZ With Advanced Features",
+                    description = "The next generation smartphone with cutting-edge technology and incredible camera system",
+                    price = 999.99,
+                    imageUrl = "",
+                    quantity = 0
+                ),
+                onProductClick = {}
+            )
+
+            ProductItem(
+                product = Product(
+                    id = "3",
+                    name = "Coffee Maker",
+                    description = null,
+                    price = 59.95,
+                    imageUrl = "",
+                    quantity = 5
+                ),
+                onProductClick = {}
+            )
         }
     }
 }
