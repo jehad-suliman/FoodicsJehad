@@ -9,6 +9,10 @@ class GetCategoriesUseCase(private val categoryRepository: CategoryRepository) {
         return categoryRepository.getCategories()
     }
 
+    fun getCategories(): Flow<List<Category>> {
+        return categoryRepository.getCategories()
+    }
+
     suspend fun refreshCategories() {
         categoryRepository.refreshCategories()
     }
