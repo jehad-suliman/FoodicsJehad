@@ -22,8 +22,8 @@ class MenuViewModel(
     private val getProductsUseCase: GetProductsUseCase,
     private val orderRepository: OrderRepository
 ) : ViewModel() {
-    private val _state = MutableStateFlow(TablesState())
-    val state: StateFlow<TablesState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(MenuState())
+    val state: StateFlow<MenuState> = _state.asStateFlow()
 
     private val searchDebounceTimeoutMs = 300L
     private var searchJob: Job? = null
@@ -168,7 +168,6 @@ class MenuViewModel(
                         it.copy(
                             products = filteredProducts,
                             isLoading = false,
-                            error = if (filteredProducts.isEmpty()) "No products found" else null
                         )
                     }
                 }
@@ -185,7 +184,7 @@ class MenuViewModel(
 
 }
 
-data class TablesState(
+data class MenuState(
     val categories: List<Category> = emptyList(),
     val products: List<Product> = emptyList(),
     val selectedCategoryId: String? = null,
